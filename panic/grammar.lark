@@ -1,0 +1,26 @@
+start : func+
+
+?expr : "if" op "then" op "else" expr -> cond
+      | op
+
+?op   : value (OP value)*
+
+?value : NAME
+       | INT
+       | call
+       | "(" expr ")"
+ 
+call  : NAME "(" args ")"
+
+args  : expr ("," expr)*
+
+// double(x) = x + x
+// add(x y) = x + y
+func  : NAME "(" argn ")" "=" expr
+argn  : NAME ("," NAME)*
+
+NAME  : /(?!\d)\w+/ 
+INT   : /\d+/
+OP    : /[-+*\/<>=&|]/
+%ignore /\s+/
+%ignore /;[^\n]*/
