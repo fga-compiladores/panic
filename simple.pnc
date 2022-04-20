@@ -1,0 +1,11 @@
+main(op, x, y) = 
+    if op = 0 then
+        x + y
+    else if op = 1 then
+        x * y
+    else if op = 2 then
+        x - y
+    else if op = 3 then
+        x / y
+    else 
+        0      

@@ -3,7 +3,26 @@ start : func+
 ?expr : "if" op "then" op "else" expr -> cond
       | op
 
-?op   : value (OP value)*
+?op   : bit_or
+
+?bit_or  : bit_or "|" bit_and 
+         | bit_and
+
+?bit_and : bit_and "&" cmp 
+         | cmp
+
+?cmp   : arith "<" arith  -> lt
+       | arith ">" arith  -> gt
+       | arith "=" arith  -> eq
+       | arith
+
+?arith : arith "+" term  -> add
+       | arith "-" term  -> sub
+       | term
+
+?term  : term "*" value  -> mul
+       | term "/" value  -> div
+       | value
 
 ?value : NAME
        | INT
